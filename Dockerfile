@@ -1,10 +1,11 @@
 FROM ubuntu:14.04
-MAINTAINER Kyle Anderson <kyle@xkyle.com>
+MAINTAINER Victor Andrade <victor@serverti.com.br>
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get -y install xvfb x11vnc wget \
+
+RUN add-apt-repository ppa:mozillateam/ppa && apt-get update && apt-get -y install xvfb x11vnc wget \
     supervisor fluxbox icedtea-7-plugin net-tools python-numpy \
-    chromium-browser
+    chromium-browser firefox-esr
 RUN sed -e '/^jdk.jar.disabledAlgorithms/s/^/#/' -i /usr/lib/jvm/java-7-openjdk-amd64/jre/lib/security/java.security
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
